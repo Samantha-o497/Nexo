@@ -12,9 +12,13 @@
     html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:#eaf0ff}
     html{scroll-behavior:smooth}
 
+    /* Particles background canvas */
     #particles{position:fixed;inset:0;z-index:-3}
+
+    /* Gradient wave background layer */
     .bg-wave{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.25}
 
+    /* Page layout */
     header{position:sticky;top:0;backdrop-filter:blur(8px);background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.12));border-bottom:1px solid rgba(255,255,255,0.04);z-index:40}
     .nav{max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:18px}
     .brand{font-weight:800;letter-spacing:.02em;font-family:Orbitron,Inter,system-ui;color:var(--accent)}
@@ -25,14 +29,17 @@
     main{max-width:1100px;margin:0 auto;padding:28px 20px 80px}
     section{padding:60px 0;position:relative}
 
+    /* Hero */
     .hero{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:80px 20px}
     .hero h1{font-size:clamp(28px,6vw,48px);margin:0;color:var(--accent);text-shadow:0 0 22px rgba(255,59,107,.18)}
     .hero p{max-width:900px;color:rgba(234,240,255,.9)}
 
+    /* Cards */
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:20px}
     .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);padding:18px;border-radius:12px;box-shadow:0 6px 30px rgba(0,0,0,.6);transition:transform .18s}
     .card:hover{transform:translateY(-6px)}
 
+    /* Accordion */
     .accordion{width:100%;max-width:980px;margin:20px auto}
     .accordion-item{background:var(--panel);border-radius:12px;overflow:hidden;margin-bottom:12px;border:1px solid rgba(255,255,255,0.03)}
     .accordion-header{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;cursor:pointer}
@@ -41,6 +48,7 @@
     .accordion-item.active .accordion-body{padding:14px 18px 22px;max-height:1200px}
     .accent-pill{background:rgba(255,59,107,0.12);color:var(--accent);padding:6px 10px;border-radius:999px;font-weight:600}
 
+    /* Ticket buttons */
     .buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
     .btn{padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);font-weight:700}
     .btn.claim{background:#1e3a8a;color:#fff;border-color:rgba(59,130,246,.15)}
@@ -51,16 +59,20 @@
 
     .explain{margin-top:12px;background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;color:rgba(234,240,255,.95)}
 
+    /* Fade-in on scroll */
     .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
     .reveal.visible{opacity:1;transform:none}
 
+    /* Footer */
     footer{padding:28px 20px;text-align:center;color:rgba(234,240,255,.7)}
 
+    /* Responsive */
     @media (max-width:720px){.nav{padding:12px}.nav-links{display:none}
       .hero{padding:40px 12px}.accordion-header{padding:12px}.accordion-body{padding:0 12px}}
   </style>
 </head>
 <body>
+  <!-- Particles canvas -->
   <canvas id="particles"></canvas>
 
   <header>
@@ -94,77 +106,108 @@
     <section id="punishments" class="reveal">
       <h2>Punishment Guidelines</h2>
       <div class="accordion">
+
         <div class="accordion-item">
-          <div class="accordion-header"><h3>Chat Offenses</h3><span class="accent-pill">Mute</span></div>
+          <div class="accordion-header"><h3>1️⃣ Chat Offenses</h3><span class="accent-pill">Chat</span></div>
           <div class="accordion-body">
-            <ul>
-              <li>Spam / Flooding → 10m - 1h mute</li>
-              <li>Toxicity / Harassment → 1h - 1d mute</li>
-              <li>Advertising → 7d mute or ban</li>
-            </ul>
+            <p>Spam (3+ msgs/2s) → Warn → 10m Mute → 30m Mute → 1h Mute</p>
+            <p>Excessive Caps → Warn → 10m Mute → 30m Mute</p>
+            <p>Toxicity/Disrespect → Warn → 30m Mute → 1h Mute → 1d Mute</p>
+            <p>Harassment/Targeted Hate → 1h Mute → 1d Mute → 3d Mute → 7d Ban</p>
+            <p>Advertising (Discord/IP links) → Permanent Ban</p>
+            <p>Light Self-Promo (YT/Twitch) → Warn → 30m Mute → 1h Mute</p>
           </div>
         </div>
+
         <div class="accordion-item">
-          <div class="accordion-header"><h3>Gameplay Offenses</h3><span class="accent-pill">Ban</span></div>
+          <div class="accordion-header"><h3>2️⃣ LifeSteal Gameplay Offenses</h3><span class="accent-pill">Gameplay</span></div>
           <div class="accordion-body">
-            <ul>
-              <li>Bug Abuse → 7d - Perm Ban</li>
-              <li>Duping → Perm Ban</li>
-              <li>Alt Abuse → 14d - Perm Ban</li>
-            </ul>
+            <p>Heart Scamming → 3d Ban → 7d Ban → 14d Ban → Permanent Ban</p>
+            <p>Alt Abuse → Permanent Ban</p>
+            <p>TP Trapping → 7d Ban → 14d Ban → Permanent Ban</p>
+            <p>Scamming Trades → 3d Ban → 7d Ban → 14d Ban → Permanent Ban</p>
+            <p>Griefing Bases (if disallowed) → Warn → 1d Ban → 7d Ban</p>
+            <p>Combat Logging → Warn → 1d Ban → 3d Ban → 7d Ban</p>
+            <p>Teaming in Solos (if forbidden) → Warn → 3d Ban → 7d Ban</p>
           </div>
         </div>
+
         <div class="accordion-item">
-          <div class="accordion-header"><h3>Hacking / Cheats</h3><span class="accent-pill">Ban</span></div>
+          <div class="accordion-header"><h3>3️⃣ Hacking / Cheating</h3><span class="accent-pill">Security</span></div>
           <div class="accordion-body">
-            <ul>
-              <li>Xray → 14d Ban</li>
-              <li>KillAura / Fly / Combat → 30d - Perm Ban</li>
-              <li>Autoclicker / Macros → 7d Ban</li>
-            </ul>
+            <p>X-Ray / Resource Exploits → 14d Ban → Permanent Ban</p>
+            <p>KillAura, Reach, AimBot → Permanent Ban</p>
+            <p>AutoClicker/Macros → 14d Ban → Permanent Ban</p>
+            <p>Illegal Mods (ESP, FreeCam, InvSee hacks) → Permanent Ban</p>
+            <p>Duplication (hearts/items) → Permanent Ban</p>
           </div>
         </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header"><h3>4️⃣ Serious Offenses</h3><span class="accent-pill">Severe</span></div>
+          <div class="accordion-body">
+            <p>Doxxing / IRL Threats → Permanent Ban</p>
+            <p>DDOS Threats / Attempts → Permanent Ban + Report to Hosting</p>
+            <p>Impersonating Staff → 7d Ban → Permanent Ban</p>
+            <p>Ban / Mute Evasion (alts/VPN) → Extend punishment → Permanent Ban</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header"><h3>5️⃣ Staff Permissions by Rank</h3><span class="accent-pill">Roles</span></div>
+          <div class="accordion-body">
+            <p>Helper / Sr-Helper → Warns, Kicks, Mutes (up to 1h)</p>
+            <p>Mod / Sr-Mod → Tempbans (up to 7d), handle gameplay issues</p>
+            <p>Admin / Sr-Admin → Permanent bans, hacker checks, appeals</p>
+            <p>Manager → Final say in all punishments</p>
+            <p><strong>⚡ Important:</strong> Anything that affects hearts unfairly (dupes, alts, scamming, hacks) = immediate strong punishment. Always collect evidence.</p>
+          </div>
+        </div>
+
       </div>
     </section>
 
     <section id="tickets" class="reveal">
       <h2>🎫 Ticket Handling (Discord)</h2>
-      <p>Follow these steps when handling player tickets:</p>
-      <div class="buttons">
-        <div class="btn claim">Claim</div>
-        <div class="btn lock">Lock</div>
-        <div class="btn unlock">Unlock</div>
-        <div class="btn close">Close</div>
-        <div class="btn transcript">Transcript</div>
+      <div class="card">
+        <p><b>When a player opens a ticket on Discord:</b></p>
+        <ul style="text-align:left;line-height:1.6">
+          <li>Greet the player politely and thank them for opening a ticket.</li>
+          <li>Ask for details (IGN, what happened, proof if needed).</li>
+          <li>Punishment appeals → forward to Admin+ only.</li>
+          <li>Bug reports → collect evidence & send to Developers.</li>
+          <li>Player reports → request proof, punish if valid.</li>
+          <li>Stay professional — no jokes, no bias.</li>
+          <li>Close only when solved.</li>
+          <li>If unsure, escalate to Sr-Mod/Admin/Manager.</li>
+        </ul>
+        <p><b>⚡ Important:</b> Never delete messages in tickets, always keep logs.</p>
       </div>
-      <div class="explain">
-        <p><b>Claim</b>: Assign yourself to the ticket.</p>
-        <p><b>Lock</b>: Prevent further responses if resolved.</p>
-        <p><b>Unlock</b>: Reopen if new info appears.</p>
-        <p><b>Close</b>: End the ticket officially.</p>
-        <p><b>Transcript</b>: Save evidence before closing.</p>
+
+      <div style="margin-top:20px">
+        <h3>Ticket Buttons</h3>
+        <div class="buttons">
+          <div class="btn claim">✅ Claim</div>
+          <div class="btn lock">🔒 Lock</div>
+          <div class="btn unlock">🔓 Unlock</div>
+          <div class="btn close">🗑️ Close Ticket</div>
+          <div class="btn transcript">🗑️ Close & Transcript</div>
+        </div>
+
+        <div class="explain">
+          <ul>
+            <li><b>✅ Claim:</b> Take ownership, so other staff know you’re handling it.</li>
+            <li><b>🔒 Lock:</b> Stop the player from sending new messages (staff can still reply).</li>
+            <li><b>🔓 Unlock:</b> Reopen if you need more info from the player.</li>
+            <li><b>🗑️ Close Ticket:</b> Close without saving transcript — use for trivial issues.</li>
+            <li><b>🗑️ Close & Transcript:</b> Close and save full logs. Use for reports, punishments, and appeals.</li>
+          </ul>
+        </div>
+
+        <p style="margin-top:12px"><strong>Pro tip:</strong> Always collect screenshots and time stamps. If unsure, escalate to Sr-Mod/Admin and document your decision in the ticket.</p>
       </div>
     </section>
 
-    <section id="evidence" class="reveal">
-      <h2>📷 Evidence Collection</h2>
-      <p>Always record proof before punishing players:</p>
-      <ul>
-        <li>Use /ss (screen share) for suspected hackers</li>
-        <li>Screenshot chat before muting</li>
-        <li>Clip gameplay when banning for cheats</li>
-      </ul>
-    </section>
-
-    <section id="appeals" class="reveal">
-      <h2>📨 Appeals</h2>
-      <p>If a player appeals a punishment:</p>
-      <ul>
-        <li>Review the provided evidence</li>
-        <li>Discuss with other staff if unsure</li>
-        <li>Keep the decision fair and unbiased</li>
-      </ul>
-    </section>
   </main>
 
   <footer>
@@ -172,6 +215,7 @@
   </footer>
 
   <script>
+    // Particles background (glowing dots)
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
     let W = canvas.width = innerWidth, H = canvas.height = innerHeight;
@@ -183,12 +227,15 @@
     function drawParticles(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy; if(p.x<0)p.x=W; if(p.x>W)p.x=0; if(p.y<0)p.y=H; if(p.y>H)p.y=0; ctx.beginPath(); ctx.fillStyle=`hsla(${p.hue},90%,70%,0.08)`; ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();});}
     (function loop(){drawParticles(); requestAnimationFrame(loop);})();
 
+    // Reveal on scroll
     const reveals = document.querySelectorAll('.reveal');
     function handleReveal(){reveals.forEach(el=>{const rect=el.getBoundingClientRect(); if(rect.top < innerHeight*0.85) el.classList.add('visible'); else el.classList.remove('visible');});}
     window.addEventListener('scroll', handleReveal); handleReveal();
 
+    // Accordion toggles
     document.querySelectorAll('.accordion-header').forEach(h=>h.addEventListener('click',()=>{h.parentElement.classList.toggle('active')}));
 
+    // Smooth fade for cards
     document.querySelectorAll('.card').forEach(c=>{c.classList.add('reveal')});
     handleReveal();
   </script>
