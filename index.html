@@ -87,7 +87,6 @@
       padding-left: 1.2rem;
     }
 
-    /* Canvas for particles */
     #particles-js {
       position: fixed;
       width: 100%;
@@ -98,28 +97,20 @@
       background: #0d1117;
     }
 
-    .ticket-btns, .ticket-controls {
+    .ticket-controls {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 1rem;
     }
 
-    .ticket-btns button, .ticket-controls button {
+    .ticket-controls button {
       border: none;
       padding: 0.7rem 1.2rem;
       border-radius: 10px;
       font-weight: bold;
       cursor: pointer;
       transition: 0.3s;
-    }
-
-    .ticket-btns button {
-      background: #00d9ff;
-    }
-
-    .ticket-btns button:hover {
-      background: #009ec7;
     }
 
     .ticket-controls .claim { background: #3b82f6; }
@@ -129,6 +120,15 @@
     .ticket-controls .transcript { background: #dc2626; }
 
     .ticket-controls button:hover { opacity: 0.8; }
+
+    footer {
+      text-align: center;
+      padding: 3rem 1rem;
+      font-size: 3rem;
+      font-weight: bold;
+      color: #00d9ff;
+      text-shadow: 0 0 15px #00d9ff;
+    }
   </style>
 </head>
 <body>
@@ -188,9 +188,6 @@
         <ul>
           <li>Greet the player politely and thank them for opening a ticket</li>
           <li>Ask for details (IGN, what happened, proof if needed)</li>
-          <li>Punishment appeals - forward to admin+ only</li>
-          <li>Bug reports - collect evidence and send to developers</li>
-          <li>Player reports - request proof, punish if valid</li>
           <li>Stay professional - no jokes, no bias</li>
           <li>Close only when solved</li>
           <li>If unsure, escalate to Sr-Mod/Admin/Manager</li>
@@ -202,17 +199,9 @@
 
   <section id="tickets" class="section">
     <h2>🎟️ Tickets</h2>
-    <p>Staff must handle tickets professionally. Choose the right category when responding:</p>
-    <div class="ticket-btns">
-      <button>📝 Bug Report</button>
-      <button>⚔️ Player Report</button>
-      <button>📩 Punishment Appeal</button>
-      <button>💡 Suggestion</button>
-      <button>❓ General Help</button>
-    </div>
+    <p>Staff must handle tickets professionally. Ticket control buttons help manage them:</p>
 
     <h3 style="margin-top:2rem;">⚙️ Ticket Control Buttons</h3>
-    <p>These buttons are used by staff when managing tickets:</p>
     <div class="ticket-controls">
       <button class="claim">✅ Claim</button>
       <button class="lock">🔒 Lock</button>
@@ -232,6 +221,10 @@
     </div>
   </section>
 
+  <footer>
+    ✨ OWAILA'S PRETTY ✨
+  </footer>
+
   <script>
     const acc = document.getElementsByClassName("accordion");
     for (let i = 0; i < acc.length; i++) {
@@ -247,7 +240,6 @@
     }
   </script>
 
-  <!-- Particles.js library -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
     particlesJS("particles-js", {
