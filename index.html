@@ -1,243 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>NEXOVARAMC — Staff Guide</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXOVARAMC Staff Guide</title>
   <style>
-    :root{
-      --bg:#07070a; --panel:#0f1115; --muted:#9aa4bf; --accent:#ff3b6b; --accent2:#6bf3ff;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      background: #0d1117;
+      overflow-x: hidden;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:#eaf0ff}
-    html{scroll-behavior:smooth}
 
-    /* Particles background canvas */
-    #particles{position:fixed;inset:0;z-index:-3}
+    header {
+      background: #111827;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      border-bottom: 2px solid #1f2937;
+    }
 
-    /* Gradient wave background layer */
-    .bg-wave{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.25}
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #1f2937;
+      padding: 0.5rem;
+    }
 
-    /* Page layout */
-    header{position:sticky;top:0;backdrop-filter:blur(8px);background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.12));border-bottom:1px solid rgba(255,255,255,0.04);z-index:40}
-    .nav{max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:18px}
-    .brand{font-weight:800;letter-spacing:.02em;font-family:Orbitron,Inter,system-ui;color:var(--accent)}
-    .nav-links{margin-left:auto;display:flex;gap:12px}
-    .nav-links a{color:rgba(234,240,255,.9);text-decoration:none;padding:8px 10px;border-radius:8px;transition:all .18s}
-    .nav-links a:hover{background:rgba(255,255,255,0.03);box-shadow:0 6px 30px rgba(107,243,255,0.03);color:var(--accent)}
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: bold;
+    }
 
-    main{max-width:1100px;margin:0 auto;padding:28px 20px 80px}
-    section{padding:60px 0;position:relative}
+    nav a:hover {
+      color: #00d9ff;
+    }
 
-    /* Hero */
-    .hero{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:80px 20px}
-    .hero h1{font-size:clamp(28px,6vw,48px);margin:0;color:var(--accent);text-shadow:0 0 22px rgba(255,59,107,.18)}
-    .hero p{max-width:900px;color:rgba(234,240,255,.9)}
+    .section {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
 
-    /* Cards */
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:20px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);padding:18px;border-radius:12px;box-shadow:0 6px 30px rgba(0,0,0,.6);transition:transform .18s}
-    .card:hover{transform:translateY(-6px)}
+    .accordion {
+      background: #1f2937;
+      margin: 0.5rem 0;
+      padding: 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
 
-    /* Accordion */
-    .accordion{width:100%;max-width:980px;margin:20px auto}
-    .accordion-item{background:var(--panel);border-radius:12px;overflow:hidden;margin-bottom:12px;border:1px solid rgba(255,255,255,0.03)}
-    .accordion-header{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;cursor:pointer}
-    .accordion-header h3{margin:0;font-size:16px}
-    .accordion-body{max-height:0;overflow:hidden;padding:0 18px;transition:max-height .36s ease,padding .36s}
-    .accordion-item.active .accordion-body{padding:14px 18px 22px;max-height:1200px}
-    .accent-pill{background:rgba(255,59,107,0.12);color:var(--accent);padding:6px 10px;border-radius:999px;font-weight:600}
+    .accordion:hover {
+      background: #374151;
+    }
 
-    /* Ticket buttons */
-    .buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .btn{padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);font-weight:700}
-    .btn.claim{background:#1e3a8a;color:#fff;border-color:rgba(59,130,246,.15)}
-    .btn.lock{background:#92400e;color:#fff}
-    .btn.unlock{background:#374151;color:#fff}
-    .btn.close{background:#dc2626;color:#fff}
-    .btn.transcript{background:#7f1d1d;color:#fff}
+    .panel {
+      display: none;
+      padding: 1rem;
+      margin-top: 0.5rem;
+      background: #111827;
+      border-radius: 12px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
 
-    .explain{margin-top:12px;background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;color:rgba(234,240,255,.95)}
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-    /* Fade-in on scroll */
-    .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
-    .reveal.visible{opacity:1;transform:none}
+    .card {
+      background: #1f2937;
+      padding: 1rem;
+      margin: 0.5rem 0;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
 
-    /* Footer */
-    footer{padding:28px 20px;text-align:center;color:rgba(234,240,255,.7)}
+    ul {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
 
-    /* Responsive */
-    @media (max-width:720px){.nav{padding:12px}.nav-links{display:none}
-      .hero{padding:40px 12px}.accordion-header{padding:12px}.accordion-body{padding:0 12px}}
+    /* Canvas for particles */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      background: #0d1117;
+    }
+
+    .ticket-btns, .ticket-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 1rem;
+    }
+
+    .ticket-btns button, .ticket-controls button {
+      border: none;
+      padding: 0.7rem 1.2rem;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .ticket-btns button {
+      background: #00d9ff;
+    }
+
+    .ticket-btns button:hover {
+      background: #009ec7;
+    }
+
+    .ticket-controls .claim { background: #3b82f6; }
+    .ticket-controls .lock { background: #f59e0b; }
+    .ticket-controls .unlock { background: #9ca3af; }
+    .ticket-controls .close { background: #ef4444; }
+    .ticket-controls .transcript { background: #dc2626; }
+
+    .ticket-controls button:hover { opacity: 0.8; }
   </style>
 </head>
 <body>
-  <!-- Particles canvas -->
-  <canvas id="particles"></canvas>
+  <div id="particles-js"></div>
 
-  <header>
-    <div class="nav">
-      <div class="brand">NEXOVARAMC</div>
-      <nav class="nav-links">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#punishments">Punishments</a>
-        <a href="#tickets">Tickets</a>
-      </nav>
+  <header>⚔️ NEXOVARAMC Staff Guide ⚔️</header>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#punishments">Punishments</a>
+    <a href="#tickets">Tickets</a>
+  </nav>
+
+  <section id="punishments" class="section">
+    <h2>📖 Staff Punishment & Ticket Guidelines</h2>
+    <p>Clear, consistent, and documented punishments to keep NEXOVARAMC fair. This page is for staff reference only.</p>
+
+    <div class="accordion">📌 Guidelines</div>
+    <div class="panel">
+      <div class="card">📌 Use these guidelines to keep punishments consistent</div>
+      <div class="card">🛡️ LifeSteal-focused: protect the heart economy</div>
+      <div class="card">📝 Always collect evidence before action</div>
     </div>
-  </header>
 
-  <main>
-    <section id="home" class="hero">
-      <h1>Staff Punishment & Ticket Guidelines</h1>
-      <p>Clear, consistent, and documented punishments to keep NEXOVARAMC fair. This page is for staff reference only.</p>
-      <div class="grid reveal">
-        <div class="card">📌 Use these guidelines to keep punishments consistent</div>
-        <div class="card">🛡️ LifeSteal-focused: protect the heart economy</div>
-        <div class="card">📝 Always collect evidence before action</div>
-      </div>
-    </section>
+    <div class="accordion">💬 Chat Offenses</div>
+    <div class="panel">
+      <div class="card">Spam — Warn → Mute</div>
+      <div class="card">Disrespect — Warn → Mute</div>
+      <div class="card">Hate Speech — Instant Ban</div>
+    </div>
 
-    <section id="about" class="reveal">
-      <h2>About</h2>
-      <p>NEXOVARAMC is a LifeSteal server: hearts matter. Staff must act quickly on severe offenses (dupes, alts, hacking) and be fair on community matters.</p>
-    </section>
+    <div class="accordion">⚔️ Hacking Offenses</div>
+    <div class="panel">
+      <div class="card">KillAura / Reach — 30d Ban → Permanent Ban</div>
+      <div class="card">X-Ray / Exploits — 14d Ban → 30d Ban</div>
+      <div class="card">AutoClicker / Macros — Warn → 7d Ban → 30d Ban</div>
+    </div>
 
-    <section id="punishments" class="reveal">
-      <h2>Punishment Guidelines</h2>
-      <div class="accordion">
+    <div class="accordion">🎮 Gameplay Offenses</div>
+    <div class="panel">
+      <div class="card">TP Killing / Scamming — Warn → 7d Ban</div>
+      <div class="card">Bug Abuse — 7d Ban → 30d Ban</div>
+      <div class="card">Alt Abusing — 30d Ban → Permanent Ban</div>
+    </div>
 
-        <div class="accordion-item">
-          <div class="accordion-header"><h3>1️⃣ Chat Offenses</h3><span class="accent-pill">Chat</span></div>
-          <div class="accordion-body">
-            <p>Spam (3+ msgs/2s) → Warn → 10m Mute → 30m Mute → 1h Mute</p>
-            <p>Excessive Caps → Warn → 10m Mute → 30m Mute</p>
-            <p>Toxicity/Disrespect → Warn → 30m Mute → 1h Mute → 1d Mute</p>
-            <p>Harassment/Targeted Hate → 1h Mute → 1d Mute → 3d Mute → 7d Ban</p>
-            <p>Advertising (Discord/IP links) → Permanent Ban</p>
-            <p>Light Self-Promo (YT/Twitch) → Warn → 30m Mute → 1h Mute</p>
-          </div>
-        </div>
+    <div class="accordion">🚨 Serious Offenses</div>
+    <div class="panel">
+      <div class="card">DDoS / DoX Threats — Permanent Ban</div>
+      <div class="card">IRL Trading — Permanent Ban</div>
+      <div class="card">Staff Impersonation — 30d Ban → Permanent Ban</div>
+    </div>
 
-        <div class="accordion-item">
-          <div class="accordion-header"><h3>2️⃣ LifeSteal Gameplay Offenses</h3><span class="accent-pill">Gameplay</span></div>
-          <div class="accordion-body">
-            <p>Heart Scamming → 3d Ban → 7d Ban → 14d Ban → Permanent Ban</p>
-            <p>Alt Abuse → Permanent Ban</p>
-            <p>TP Trapping → 7d Ban → 14d Ban → Permanent Ban</p>
-            <p>Scamming Trades → 3d Ban → 7d Ban → 14d Ban → Permanent Ban</p>
-            <p>Griefing Bases (if disallowed) → Warn → 1d Ban → 7d Ban</p>
-            <p>Combat Logging → Warn → 1d Ban → 3d Ban → 7d Ban</p>
-            <p>Teaming in Solos (if forbidden) → Warn → 3d Ban → 7d Ban</p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <div class="accordion-header"><h3>3️⃣ Hacking / Cheating</h3><span class="accent-pill">Security</span></div>
-          <div class="accordion-body">
-            <p>X-Ray / Resource Exploits → 14d Ban → Permanent Ban</p>
-            <p>KillAura, Reach, AimBot → Permanent Ban</p>
-            <p>AutoClicker/Macros → 14d Ban → Permanent Ban</p>
-            <p>Illegal Mods (ESP, FreeCam, InvSee hacks) → Permanent Ban</p>
-            <p>Duplication (hearts/items) → Permanent Ban</p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <div class="accordion-header"><h3>4️⃣ Serious Offenses</h3><span class="accent-pill">Severe</span></div>
-          <div class="accordion-body">
-            <p>Doxxing / IRL Threats → Permanent Ban</p>
-            <p>DDOS Threats / Attempts → Permanent Ban + Report to Hosting</p>
-            <p>Impersonating Staff → 7d Ban → Permanent Ban</p>
-            <p>Ban / Mute Evasion (alts/VPN) → Extend punishment → Permanent Ban</p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <div class="accordion-header"><h3>5️⃣ Staff Permissions by Rank</h3><span class="accent-pill">Roles</span></div>
-          <div class="accordion-body">
-            <p>Helper / Sr-Helper → Warns, Kicks, Mutes (up to 1h)</p>
-            <p>Mod / Sr-Mod → Tempbans (up to 7d), handle gameplay issues</p>
-            <p>Admin / Sr-Admin → Permanent bans, hacker checks, appeals</p>
-            <p>Manager → Final say in all punishments</p>
-            <p><strong>⚡ Important:</strong> Anything that affects hearts unfairly (dupes, alts, scamming, hacks) = immediate strong punishment. Always collect evidence.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section id="tickets" class="reveal">
-      <h2>🎫 Ticket Handling (Discord)</h2>
+    <div class="accordion">🎫 How to Handle a Ticket</div>
+    <div class="panel">
       <div class="card">
-        <p><b>When a player opens a ticket on Discord:</b></p>
-        <ul style="text-align:left;line-height:1.6">
-          <li>Greet the player politely and thank them for opening a ticket.</li>
-          <li>Ask for details (IGN, what happened, proof if needed).</li>
-          <li>Punishment appeals → forward to Admin+ only.</li>
-          <li>Bug reports → collect evidence & send to Developers.</li>
-          <li>Player reports → request proof, punish if valid.</li>
-          <li>Stay professional — no jokes, no bias.</li>
-          <li>Close only when solved.</li>
-          <li>If unsure, escalate to Sr-Mod/Admin/Manager.</li>
+        <ul>
+          <li>Greet the player politely and thank them for opening a ticket</li>
+          <li>Ask for details (IGN, what happened, proof if needed)</li>
+          <li>Punishment appeals - forward to admin+ only</li>
+          <li>Bug reports - collect evidence and send to developers</li>
+          <li>Player reports - request proof, punish if valid</li>
+          <li>Stay professional - no jokes, no bias</li>
+          <li>Close only when solved</li>
+          <li>If unsure, escalate to Sr-Mod/Admin/Manager</li>
         </ul>
-        <p><b>⚡ Important:</b> Never delete messages in tickets, always keep logs.</p>
       </div>
+      <div class="card">⚡ Important: never delete messages in tickets, always keep logs</div>
+    </div>
+  </section>
 
-      <div style="margin-top:20px">
-        <h3>Ticket Buttons</h3>
-        <div class="buttons">
-          <div class="btn claim">✅ Claim</div>
-          <div class="btn lock">🔒 Lock</div>
-          <div class="btn unlock">🔓 Unlock</div>
-          <div class="btn close">🗑️ Close Ticket</div>
-          <div class="btn transcript">🗑️ Close & Transcript</div>
-        </div>
+  <section id="tickets" class="section">
+    <h2>🎟️ Tickets</h2>
+    <p>Staff must handle tickets professionally. Choose the right category when responding:</p>
+    <div class="ticket-btns">
+      <button>📝 Bug Report</button>
+      <button>⚔️ Player Report</button>
+      <button>📩 Punishment Appeal</button>
+      <button>💡 Suggestion</button>
+      <button>❓ General Help</button>
+    </div>
 
-        <div class="explain">
-          <ul>
-            <li><b>✅ Claim:</b> Take ownership, so other staff know you’re handling it.</li>
-            <li><b>🔒 Lock:</b> Stop the player from sending new messages (staff can still reply).</li>
-            <li><b>🔓 Unlock:</b> Reopen if you need more info from the player.</li>
-            <li><b>🗑️ Close Ticket:</b> Close without saving transcript — use for trivial issues.</li>
-            <li><b>🗑️ Close & Transcript:</b> Close and save full logs. Use for reports, punishments, and appeals.</li>
-          </ul>
-        </div>
+    <h3 style="margin-top:2rem;">⚙️ Ticket Control Buttons</h3>
+    <p>These buttons are used by staff when managing tickets:</p>
+    <div class="ticket-controls">
+      <button class="claim">✅ Claim</button>
+      <button class="lock">🔒 Lock</button>
+      <button class="unlock">🔓 Unlock</button>
+      <button class="close">🗑️ Close Ticket</button>
+      <button class="transcript">🗑️ Close & Transcript</button>
+    </div>
 
-        <p style="margin-top:12px"><strong>Pro tip:</strong> Always collect screenshots and time stamps. If unsure, escalate to Sr-Mod/Admin and document your decision in the ticket.</p>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    © 2025 NEXOVARAMC — Staff Guidelines
-  </footer>
+    <div class="card">
+      <ul>
+        <li><b>Claim</b> — Assign the ticket to yourself so others know you’re handling it.</li>
+        <li><b>Lock</b> — Prevents the player from typing, useful when reviewing.</li>
+        <li><b>Unlock</b> — Reopens chat access for the player in the ticket.</li>
+        <li><b>Close Ticket</b> — Ends the ticket once it is resolved.</li>
+        <li><b>Close & Transcript</b> — Closes the ticket and saves a transcript for records.</li>
+      </ul>
+    </div>
+  </section>
 
   <script>
-    // Particles background (glowing dots)
-    const canvas = document.getElementById('particles');
-    const ctx = canvas.getContext('2d');
-    let W = canvas.width = innerWidth, H = canvas.height = innerHeight;
-    window.addEventListener('resize', ()=>{W=canvas.width=innerWidth;H=canvas.height=innerHeight; initParticles();});
+    const acc = document.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        let panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      });
+    }
+  </script>
 
-    let particles = [];
-    function initParticles(){particles = []; const count = Math.floor((W*H)/90000); for(let i=0;i<count;i++){particles.push({x:Math.random()*W,y:Math.random()*H, r:Math.random()*1.6+0.6, vx:(Math.random()-0.5)*0.2, vy:(Math.random()-0.5)*0.2, hue:200+Math.random()*100});}}
-    initParticles();
-    function drawParticles(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy; if(p.x<0)p.x=W; if(p.x>W)p.x=0; if(p.y<0)p.y=H; if(p.y>H)p.y=0; ctx.beginPath(); ctx.fillStyle=`hsla(${p.hue},90%,70%,0.08)`; ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();});}
-    (function loop(){drawParticles(); requestAnimationFrame(loop);})();
-
-    // Reveal on scroll
-    const reveals = document.querySelectorAll('.reveal');
-    function handleReveal(){reveals.forEach(el=>{const rect=el.getBoundingClientRect(); if(rect.top < innerHeight*0.85) el.classList.add('visible'); else el.classList.remove('visible');});}
-    window.addEventListener('scroll', handleReveal); handleReveal();
-
-    // Accordion toggles
-    document.querySelectorAll('.accordion-header').forEach(h=>h.addEventListener('click',()=>{h.parentElement.classList.toggle('active')}));
-
-    // Smooth fade for cards
-    document.querySelectorAll('.card').forEach(c=>{c.classList.add('reveal')});
-    handleReveal();
+  <!-- Particles.js library -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 60 },
+        size: { value: 3 },
+        move: { speed: 1 },
+        line_linked: { enable: true, color: "#00d9ff" },
+        color: { value: "#00d9ff" }
+      }
+    });
   </script>
 </body>
 </html>
